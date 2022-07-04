@@ -9,11 +9,11 @@ export const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    history.push(`/search?q=${term}`)
+    history.push(`/search?food=${term}`)
   }
 
   return (
-    <div className='searchbar'>
+    <div className="searchbar">
       <form onSubmit={handleSubmit}>
         <label htmlFor="search">Search:</label>
         <input
@@ -21,6 +21,7 @@ export const SearchBar = () => {
           id="search"
           onChange={(event) => setTerm(event.target.value)}
           required
+          placeholder="Taco..."
         />
       </form>
     </div>
