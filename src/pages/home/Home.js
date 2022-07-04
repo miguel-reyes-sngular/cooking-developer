@@ -4,7 +4,7 @@ import './Home.css'
 
 import { RecipeList } from './../../components/RecipeList'
 
-export const Home = (props) => {
+export const Home = () => {
   const { data: recipes, isPending, error } = useFetch('http://localhost:3000/recipes')
 
   return (

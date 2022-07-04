@@ -4,7 +4,7 @@ import { useFetch } from '../../hooks/useFetch'
 
 import './Create.css'
 
-export const Create = (props) => {
+export const Create = () => {
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [cookingTime, setCookingTime] = useState('')
