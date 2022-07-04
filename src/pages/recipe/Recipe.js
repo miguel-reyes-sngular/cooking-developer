@@ -19,7 +19,7 @@ export const Recipe = (props) => {
           </h2>
           <p>Takes { recipe.cookingTime } to cook</p>
           <ul>
-            { recipe.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
+            { recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}
           </ul>
           <p className='method'>
             { recipe.method }

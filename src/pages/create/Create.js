@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 import './Create.css'
 
@@ -6,10 +6,24 @@ export const Create = (props) => {
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [cookingTime, setCookingTime] = useState('')
+  const [newIngredient, setNewIngredient] = useState('')
+  const [ingredients, setIngredients] = useState([])
+  const ingredientsInput = useRef(null)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(title, method, cookingTime)
+    console.log(title, method, cookingTime, ingredients)
+  }
+
+  const handleAdd = (event) => {
+    event.preventDefault();
+    const ingredient = newIngredient.trim() //* deletes spaces before and after
+
+    if (ingredient && !ingredients.includes(ingredient)) {
+      setIngredients(prevIngredients => [...prevIngredients, ingredient])
+    }
+    setNewIngredient('')
+    ingredientsInput.current.focus()
   }
 
   return (
@@ -27,7 +41,26 @@ export const Create = (props) => {
           />
         </label>
 
-        {/* ingredients go here */}
+        <label>
+          <span>Recipe ingredients:</span>
+          <div className="ingredients">
+            <input
+              type="text"
+              onChange={(event) => setNewIngredient(event.target.value)}
+              value={newIngredient}
+              ref={ingredientsInput}
+            />
+            <button
+              className="btn"
+              onClick={handleAdd}
+            >
+              Add
+            </button>
+          </div>
+        </label>
+        <p>Current ingredients: { ingredients.map(
+          ingredient => <em key={ingredient}>{ingredient}, </em>
+        ) }</p>
 
         <label>
           <span>Recipe method:</span>
