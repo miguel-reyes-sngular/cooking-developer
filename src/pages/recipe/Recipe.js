@@ -9,11 +9,22 @@ export const Recipe = (props) => {
   const { data: recipe, isPending, error } = useFetch(url)
 
   return (
-    <div>
-      { isPending && <div>Loading...</div> }
-      { error && <div>{error}</div> }
+    <div className='recipe'>
+      { isPending && <p className='loading'>Loading...</p> }
+      { error && <p className='error'>{error}</p> }
       { recipe && (
-        <h1>{recipe.title}</h1>
+        <>
+          <h2 className='page-title'>
+            { recipe.title }
+          </h2>
+          <p>Takes { recipe.cookingTime } to cook</p>
+          <ul>
+            { recipe.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
+          </ul>
+          <p className='method'>
+            { recipe.method }
+          </p>
+        </>
       )}
     </div>
   )
