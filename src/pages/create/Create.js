@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
 
 import './Create.css'
@@ -10,6 +11,7 @@ export const Create = (props) => {
   const [newIngredient, setNewIngredient] = useState('')
   const [ingredients, setIngredients] = useState([])
   const ingredientsInput = useRef(null)
+  const history = useHistory()
 
   const { postData, data, error } = useFetch('http://localhost:3000/recipes', 'POST')
 
@@ -22,6 +24,13 @@ export const Create = (props) => {
       cookingTime: cookingTime + ' minutes'
     })
   }
+
+  //* redirect user when we have new data
+  useEffect(() => {
+    if (data) {
+      history.push('/')
+    }
+  }, [data, history])
 
   const handleAdd = (event) => {
     event.preventDefault();
@@ -91,7 +100,9 @@ export const Create = (props) => {
           />
         </label>
 
-        <button className="btn">Submit</button>
+        <button className="btn">
+          Submit
+        </button>
 
       </form>
     </div>
