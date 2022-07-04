@@ -4,6 +4,13 @@ import './RecipeList.css'
 
 export const RecipeList = props => {
   const { recipes } = props
+
+  if (recipes.length === 0) {
+    return (
+      <div className='error'>No recipes found...</div>
+    )
+  }
+
   return (
     <div className='recipe-list'>
       { recipes.map(recipe => (
