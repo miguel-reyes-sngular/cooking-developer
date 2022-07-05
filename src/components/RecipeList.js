@@ -1,5 +1,7 @@
+import { projectFirestore } from '../firebase/config'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme'
+import deleteIcon from '../assets/deleteIcon.svg'
 
 import './RecipeList.css'
 
@@ -12,6 +14,10 @@ export const RecipeList = props => {
     return (
       <div className='error'>No recipes found...</div>
     )
+  }
+
+  const handleClick = (id) => {
+    projectFirestore.collection('recipes').doc(id).delete()
   }
 
   return (
@@ -27,6 +33,12 @@ export const RecipeList = props => {
           <Link to={`/recipes/${recipe.id}`}>
             Cook This 👨‍🍳👩‍🍳
           </Link>
+          <img
+            onClick={() => handleClick(recipe.id)}
+            className="delete"
+            src={deleteIcon}
+            alt="Delete recipe"
+          />
         </div>
       )) }
     </div>
