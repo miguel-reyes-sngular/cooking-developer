@@ -16,7 +16,8 @@ export const ThemeProvider = props => {
   const { children } = props
 
   const [state, dispatch] = useReducer(themeReducer, {
-    color: 'blue'
+    color: '#58249c'
+    //* the state to begin with
   })
 
   const changeColor = (color) => {
