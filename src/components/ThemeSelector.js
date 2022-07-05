@@ -12,8 +12,6 @@ export const ThemeSelector = () => {
     changeMode(mode === 'dark' ? 'light' : 'dark')
   }
 
-  console.log(mode);
-
   return (
     <div className="theme-selector">
       <div className="mode-toggle">
