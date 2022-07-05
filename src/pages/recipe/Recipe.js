@@ -16,7 +16,7 @@ export const Recipe = () => {
   useEffect(() => {
     setIsPending(true)
 
-    projectFirestore.collection('recipes').doc(id).get().then(doc => {
+    const unsub = projectFirestore.collection('recipes').doc(id).onSnapshot(doc => {
       if(doc.exists) {
         setIsPending(false)
         setRecipe(doc.data())
@@ -25,6 +25,10 @@ export const Recipe = () => {
         setError('Could not find that recipe')
       }
     })
+
+    //* changes the UI
+    return () => unsub()
+
   }, [id])
 
   const handleClick = () => {
