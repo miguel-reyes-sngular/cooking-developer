@@ -14,7 +14,7 @@ export const Home = () => {
     setIsPending(true)
 
     //* the collection comes from firestore
-    projectFirestore.collection('recipes').get().then((snapshot) => {
+    const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot) => {
       if (snapshot.empty) {
         setError('No recipes to load')
         setIsPending(false)
@@ -29,10 +29,14 @@ export const Home = () => {
         setData(results)
         setIsPending(false)
       }
-    }).catch(error => {
+    }, (error) => {
       setError(error.message)
       setIsPending(false)
     })
+
+    //* the UI changes
+    return () => unsub()
+
   }, [])
 
   return (
