@@ -27,6 +27,12 @@ export const Recipe = () => {
     })
   }, [id])
 
+  const handleClick = () => {
+    projectFirestore.collection('recipes').doc(id).update({
+      title: 'Something different 😋'
+    })
+  }
+
   return (
     <div className={`recipe ${mode}`}>
       { isPending && <p className='loading'>Loading...</p> }
@@ -43,6 +49,7 @@ export const Recipe = () => {
           <p className='method'>
             { recipe.method }
           </p>
+          <button onClick={handleClick}>Update me</button>
         </>
       )}
     </div>
