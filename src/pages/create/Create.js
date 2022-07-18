@@ -1,6 +1,6 @@
 import { projectFirestore } from '../../firebase/config'
 import { useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import './Create.css'
 
@@ -11,7 +11,7 @@ export const Create = () => {
   const [newIngredient, setNewIngredient] = useState('')
   const [ingredients, setIngredients] = useState([])
   const ingredientsInput = useRef(null)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +24,7 @@ export const Create = () => {
 
     try {
       await projectFirestore.collection('recipes').add(doc)
-      history.push('/')
+      navigate('/')
     } catch (error) {
       console.error('An error occurred: ', error);
     }

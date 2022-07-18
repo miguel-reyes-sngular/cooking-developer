@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './SearchBar.css'
 
 export const SearchBar = () => {
   const [term, setTerm] = useState('')
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    history.push(`/search?food=${term}`)
+    navigate(`/search?food=${term}`)
   }
 
   return (
